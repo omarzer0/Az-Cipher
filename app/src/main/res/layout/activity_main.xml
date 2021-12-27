@@ -93,7 +93,7 @@
         <Button
             android:id="@+id/encrypt_btn"
             style="@style/roundButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
             android:paddingStart="@dimen/_25sdp"
@@ -107,7 +107,7 @@
         <Button
             android:id="@+id/decrypt_btn"
             style="@style/roundButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/_25sdp"
             android:paddingEnd="@dimen/_25sdp"
@@ -121,7 +121,7 @@
         <Button
             android:id="@+id/copy_btn"
             style="@style/roundButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_marginBottom="@dimen/_25sdp"
@@ -138,7 +138,7 @@
         <Button
             android:id="@+id/paste_btn"
             style="@style/roundButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/_25sdp"
             android:paddingEnd="@dimen/_25sdp"
