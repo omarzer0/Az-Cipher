@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AzCypher</string>
+    <string name="enter_text">Enter a text</string>
+    <string name="caesar">Caesar</string>
+    <string name="playfair">Playfair</string>
+    <string name="transposition">Transposition</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="decrypt">Decrypt</string>
+    <string name="copy_result">Copy result</string>
+    <string name="paste_result">Paste result</string>
+    <string name="enter_key">Enter key</string>
+</resources>
