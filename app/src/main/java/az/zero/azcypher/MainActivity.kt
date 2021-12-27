@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import az.zero.azcypher.cypher.*
 import az.zero.azcypher.databinding.ActivityMainBinding
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity() {
             val msg = binding.textEt.text.toString()
             if (msg.isEmpty()) throw Exception("Enter a message!")
             val cipherType = getCypherType()
+            if (cipherType == CypherType.CAESAR_CIPHER && !key.isDigitsOnly())
+                throw Exception("Key must be a number!")
             val cipher: Cipher = getCipher(cipherType, key)
 
             convertedMsg = when (operation) {
