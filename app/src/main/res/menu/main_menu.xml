@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/caesar_item"
+        android:title="Caesar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/fair_play_item"
+        android:title="Fair play"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/transposition_item"
+        android:title="Transposition"
+        app:showAsAction="never" />
+</menu>

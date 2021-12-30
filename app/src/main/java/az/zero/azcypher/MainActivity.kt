@@ -2,6 +2,9 @@ package az.zero.azcypher
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
@@ -13,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var convertedMsg: String = ""
+    private var menuCipherType = CypherType.CAESAR_CIPHER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,33 +25,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             encryptBtn.setOnClickListener {
-//                execute(Operation.ENCRYPT)
-                executeCipher(Operation.ENCRYPT)
+                executeCipher(Operation.ENCRYPT, menuCipherType)
             }
             decryptBtn.setOnClickListener {
-//                execute(Operation.DECRYPT)
-                executeCipher(Operation.DECRYPT)
+                executeCipher(Operation.DECRYPT, menuCipherType)
             }
 
-            copyBtn.setOnClickListener {
-                convertedMsg = resultTv.text.toString()
-                Toast.makeText(this@MainActivity, "Copied!", Toast.LENGTH_SHORT).show()
-            }
-
-            pasteBtn.setOnClickListener {
-                textEt.setText(convertedMsg)
-            }
         }
     }
 
 
-    private fun executeCipher(operation: Operation) {
+    private fun executeCipher(operation: Operation, menuCipherType: CypherType) {
         try {
             val key = binding.keyEt.text.toString()
             if (key.isEmpty()) throw Exception("Enter a key!")
             val msg = binding.textEt.text.toString()
             if (msg.isEmpty()) throw Exception("Enter a message!")
-            val cipherType = getCypherType()
+            val cipherType = menuCipherType
             if (cipherType == CypherType.CAESAR_CIPHER && !key.isDigitsOnly())
                 throw Exception("Key must be a number!")
             val cipher: Cipher = getCipher(cipherType, key)
@@ -60,18 +54,6 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "error: ${e.localizedMessage ?: "Unknown"}")
             Toast.makeText(this, e.localizedMessage ?: "Unknown", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun getCypherType(): CypherType = when (binding.radioGroup.checkedRadioButtonId) {
-        R.id.caesar_rbtn -> {
-            CypherType.CAESAR_CIPHER
-        }
-        R.id.playfair_rbtn -> {
-            CypherType.PLAYFAIR_CIPHER
-        }
-        else -> {
-            CypherType.TRANSPOSITION_CIPHER
         }
     }
 
@@ -88,7 +70,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        binding.resultTv.isVisible = true
+        binding.textEt.setText(convertedMsg)
+        binding.resultCv.isVisible = true
         binding.resultTv.text = this.convertedMsg
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.caesar_item -> {
+                menuCipherType = CypherType.CAESAR_CIPHER
+                binding.cipherTypeTextTv.text = "Caesar Cipher"
+                true
+            }
+            R.id.fair_play_item -> {
+                menuCipherType = CypherType.PLAYFAIR_CIPHER
+                binding.cipherTypeTextTv.text = "Fairplay Cipher"
+                true
+            }
+            R.id.transposition_item -> {
+                menuCipherType = CypherType.TRANSPOSITION_CIPHER
+                binding.cipherTypeTextTv.text = "Transposition Cipher"
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

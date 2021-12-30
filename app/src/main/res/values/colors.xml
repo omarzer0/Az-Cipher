@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#F2F3F2</color>
 
-    <color name="mainColor">#53B175</color>
-    <color name="secondaryColor">#43A047</color>
+    <color name="mainColor">@color/purple_700</color>
+    <color name="secondaryColor">@color/purple_700</color>
 </resources>
